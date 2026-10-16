@@ -7,6 +7,7 @@ from .Model import Model
 from .OpenAIModel import OpenAIModel
 from .OpenAIModelVector import OpenAIModelVector
 from .OpenAIRemoteModel import GatewayError, OpenAIRemoteModel
+from .OpenAIRemotePDFAnnotationModel import OpenAIRemotePDFAnnotationModel
 from .RemoteModel import RemoteModel
 
 
@@ -16,6 +17,7 @@ class ModelFactory:
     _registry: Dict[str, Type[Model]] = {
         "remote": RemoteModel,
         "openai-remote": OpenAIRemoteModel,
+        "openai-remote-pdf": OpenAIRemotePDFAnnotationModel,
         "claude": ClaudeModel,
         "openai": OpenAIModel,
         "codellama": CodeLlamaModel,

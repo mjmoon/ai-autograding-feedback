@@ -1,0 +1,79 @@
+{
+  "name": "pdf_annotation",
+  "description": "Annotations on a PDF submission, in the format accepted by the MarkUs POST /add_annotations API.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "annotations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "filename": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The name of the submitted PDF file being annotated, exactly as it appears in the submission (e.g. 'submission.pdf')."
+            },
+            "annotation_category_name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Optional annotation category; MarkUs creates the category if it does not exist."
+            },
+            "content": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The annotation text shown to the student."
+            },
+            "type": {
+              "const": "PdfAnnotation",
+              "description": "Optional annotation type; if given, it must be 'PdfAnnotation' for a PDF file."
+            },
+            "page": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The 1-based page number the annotation is on."
+            },
+            "x1": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000,
+              "description": "Left edge of the annotated rectangle, as a fraction of the page width multiplied by 100000."
+            },
+            "y1": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000,
+              "description": "Top edge of the annotated rectangle, as a fraction of the page height multiplied by 100000."
+            },
+            "x2": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000,
+              "description": "Right edge of the annotated rectangle, as a fraction of the page width multiplied by 100000."
+            },
+            "y2": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000,
+              "description": "Bottom edge of the annotated rectangle, as a fraction of the page height multiplied by 100000."
+            }
+          },
+          "required": [
+            "filename",
+            "content",
+            "page",
+            "x1",
+            "y1",
+            "x2",
+            "y2"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "annotations"
+    ],
+    "additionalProperties": false
+  }
+}

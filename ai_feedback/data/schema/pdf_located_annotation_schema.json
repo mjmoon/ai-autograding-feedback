@@ -1,0 +1,85 @@
+{
+  "name": "pdf_located_annotation",
+  "description": "Comments on one PDF page, each tied to text or a figure on that page so it can be placed as a MarkUs PDF annotation.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "annotations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The comment shown to the student."
+            },
+            "quote": {
+              "type": "string",
+              "description": "2 to 8 words copied exactly from this page that the comment is about, e.g. a sentence fragment, code, or an axis label. Empty string if the comment is about a plot as a whole."
+            },
+            "figure": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "If the comment is about a plot or picture, its number on this page counting from the top; 0 if it is not about a plot."
+            },
+            "figure_part": {
+              "type": "string",
+              "enum": [
+                "none",
+                "whole",
+                "title",
+                "x_axis",
+                "y_axis",
+                "legend",
+                "panel",
+                "bar"
+              ],
+              "description": "Which part of the plot the comment is about ('panel' is the plotting area); 'none' if it is not about a plot."
+            },
+            "bar": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "When figure_part is 'bar', the bar's number counting from the left."
+            },
+            "x1": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Left edge of the commented area, in pixels of the page image."
+            },
+            "y1": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Top edge of the commented area, in pixels of the page image."
+            },
+            "x2": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Right edge of the commented area, in pixels of the page image."
+            },
+            "y2": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Bottom edge of the commented area, in pixels of the page image."
+            }
+          },
+          "required": [
+            "content",
+            "quote",
+            "figure",
+            "figure_part",
+            "x1",
+            "y1",
+            "x2",
+            "y2"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "annotations"
+    ],
+    "additionalProperties": false
+  }
+}

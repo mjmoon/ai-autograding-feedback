@@ -6,7 +6,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from . import code_processing, image_processing, text_processing
+from . import code_processing, image_processing, pdf_page_processing, text_processing
 from .helpers import arg_options
 from .helpers.constants import HELP_MESSAGES
 from .models import GatewayError, ModelFactory
@@ -15,6 +15,7 @@ from .models import GatewayError, ModelFactory
 _PROCESSOR_BY_SCOPE = {
     "image": image_processing.process_image,
     "text": text_processing.process_text,
+    "pdf_page": pdf_page_processing.process_pdf_page,
 }
 
 _TYPE_BY_EXTENSION = {
@@ -202,6 +203,7 @@ def main() -> int:
     parser.add_argument("--submission", type=str, required=True, help=HELP_MESSAGES["submission"])
     parser.add_argument("--solution", type=str, required=False, default="", help=HELP_MESSAGES["solution"])
     parser.add_argument("--question", type=str, required=False, help=HELP_MESSAGES["question"])
+    parser.add_argument("--page", type=int, required=False, help=HELP_MESSAGES["page"])
     parser.add_argument(
         "--provider",
         type=str,

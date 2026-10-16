@@ -60,6 +60,7 @@ class Scope(Enum):
 
     IMAGE = "image"
     CODE = "code"
+    PDF_PAGE = "pdf_page"
     TEXT = "text"
 
     def __str__(self):
